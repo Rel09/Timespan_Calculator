@@ -1,16 +1,39 @@
 import datetime
+
 if __name__ == '__main__':
     while True:
-        my_time_string = input("time: ")
-        now = datetime.datetime.now()
-        my_datetime = datetime.datetime.strptime(my_time_string, "%H:%M")
-        my_datetime = now.replace(hour=my_datetime.time().hour, minute=my_datetime.time().minute)
+        try:
+            time_input = datetime.datetime.strptime(input('specify time in HH:MM format: '), "%H:%M")
+            time_now = datetime.datetime.now()
 
-        # This is not the right method to convert time, but i didnt had access to documentation or whatever so.. :)
-        bor = now - my_datetime
-        bor = str(bor)
-        bor = bor.replace(":00", "")
-        hours, minutes = bor.split(":")
-        minute = (int(hours) * 60) + int(minutes)
+            z = datetime.timedelta(hours=(time_now.hour - time_input.hour), minutes=(time_now.minute - time_input.minute))
 
-        print(str(minute) + " Minutes Difference")
+            z = z.total_seconds() / 60
+            z = int(str(z).replace(".0", ""))
+
+            # z = Total minutes
+            if z >= 0:
+
+                if z >= 0 and z <= 14:
+                    print(str(z) + ' minutes - Free')
+
+                elif z <= 59:
+                    print(str(z) + " minutes - 5$")
+
+                elif z <= 119:
+                    print(str(z) + " minutes - 8$")
+
+                elif z <= 179:
+                    print(str(z) + " minutes - 11$")
+
+                elif z <= 239:
+                    print(str(z) + " minutes - 14$")
+
+                elif z >= 240:
+                    print(str(z) + " minutes - 17$")
+
+
+            else:
+                print("Wrong input, please retry [Err 2]")
+        except:
+            print("Wrong input, please retry [Err 1]")
