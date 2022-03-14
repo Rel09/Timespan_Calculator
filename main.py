@@ -8,8 +8,7 @@ if __name__ == '__main__':
 
             z = datetime.timedelta(hours=(time_now.hour - time_input.hour), minutes=(time_now.minute - time_input.minute))
 
-            z = z.total_seconds() / 60
-            z = int(str(z).replace(".0", ""))
+            z = int(str(z.total_seconds() / 60).replace(".0", ""))
 
             # z = Total minutes
             if z >= 0:
